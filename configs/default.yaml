@@ -6,7 +6,20 @@ data:
   sites: [cleveland, hungarian, switzerland, va]
   target_binarize: true        # num > 0 -> 1
   test_size: 0.2
-  val_size: 0.15               # taken from the training portion
+  val_size: 0.15               # fraction of the non-test portion
+
+  # Feature set (decided from the data audit, see docs/data_audit.md).
+  # Dropped: ca, thal (>=83% missing at 3 of 4 sites), slope (51-65% missing at 2 sites),
+  # chol (recorded as 0 = missing for ALL Switzerland rows and 25% of VA rows).
+  # Re-adding a feature is a config change only; every site must still share this feature space.
+  continuous: [age, trestbps, thalach, oldpeak]
+  binary: [sex, fbs, exang]
+  categorical:                 # fixed category sets so every site yields identical columns
+    cp: [1, 2, 3, 4]
+    restecg: [0, 1, 2]
+
+  # Columns where 0 means "not recorded" rather than a real measurement.
+  zero_is_missing: [chol, trestbps]
 
 model:
   hidden_sizes: [64, 32]       # tune later; Figure 3.1 uses generic labels

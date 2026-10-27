@@ -7,3 +7,5 @@ for site, df in load_all_sites().items():
     print(df.isna().sum()[lambda s: s > 0].to_string() or "  none")
     print("label balance (num>0):")
     print((df[TARGET] > 0).value_counts(normalize=True).round(3).to_string())
+    for col in ("chol", "trestbps"):
+        print(f"{col} == 0:", int((df[col] == 0).sum()))
