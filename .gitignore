@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+
+# Data (public, but downloaded by script rather than committed)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Experiment outputs (keep folders, ignore generated files)
+results/metrics/*
+results/figures/*
+results/logs/*
+!results/metrics/.gitkeep
+!results/figures/.gitkeep
+!results/logs/.gitkeep
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
